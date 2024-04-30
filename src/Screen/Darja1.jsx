@@ -1,38 +1,37 @@
-import React from 'react'
-import BookShowingLayout from '../Component/BookShowingLayout.jsx'
-import Book63 from '../assets/book63.png'
-import Book64 from '../assets/book64.png'
-const Darja1 = () => {
-  const DataDarja1 = [
-    {
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/darsibook-80dce.appspot.com/o/book13.jpg?alt=media&token=5aaf2bd0-53ae-4887-b66a-70d6ad532ec1",
-      "ReadingLink" : "ghhh",
-      "DownloadLink" : "gjiiyfkkg"
-    },    {
-      "imageUrl": Book64,
-      "ReadingLink" : "ghhh",
-      "DownloadLink" : "gjiiyfkkg"
-    },
-        {
-      "imageUrl": Book63,
-      "ReadingLink" : "ghhh",
-      "DownloadLink" : "gjiiyfkkg"
-    },    {
-      "imageUrl": Book64,
-      "ReadingLink" : "ghhh",
-      "DownloadLink" : "gjiiyfkkg"
-    }
-    ]
-  return (
-    <>
-  {
-    DataDarja1.map((data, i) => (
-          <BookShowingLayout ImgUrl={data.imageUrl} ReadingLink={data.ReadingLink} DownloadLink={data.DownloadLink} />
-    
-      ))
-  }
-    </>
-  )
-}
+import { useState, useEffect } from "react";
+import BookShowingLayout from "../Component/BookShowingLayout.jsx";
+import { database } from "../Firebase/Firebase.jsx";
+import { collection, getDocs } from "firebase/firestore";
 
-export default Darja1
+const Darja1 = () => {
+    const [darja1Data, setDarja1Data] = useState([]);
+
+    async function getdata() {
+        const querySnapshot = await getDocs(collection(database, "darja1"));
+        querySnapshot.forEach(doc => {
+            setDarja1Data(pd => [
+                ...pd,
+                { docId: doc.id, docData: JSON.stringify(doc.data()) }
+            ]);
+        });
+    }
+
+    useEffect(() => {
+        getdata();
+    }, []);
+
+    return (
+        <>
+            {darja1Data.map((mapdata, i) => (
+                <BookShowingLayout
+                    key={i}
+                    ImgUrl={JSON.parse(mapdata.docData).image}
+                    ReadingLink={JSON.parse(mapdata.docData).ReadingUrl}
+                    DownloadLink={JSON.parse(mapdata.docData).downloadURL}
+                />
+            ))}
+        </>
+    );
+};
+
+export default Darja1;

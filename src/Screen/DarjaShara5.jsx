@@ -3,11 +3,11 @@ import BookShowingLayout from "../Component/BookShowingLayout.jsx";
 import { database } from "../Firebase/Firebase.jsx";
 import { collection, getDocs } from "firebase/firestore";
 
-const Darja5 = () => {
+const DarjaShara5 = () => {
     const [darja5Data, setDarja5Data] = useState([]);
 
     async function getdata() {
-        const querySnapshot = await getDocs(collection(database, "darja5"));
+        const querySnapshot = await getDocs(collection(database, "darja05"));
         querySnapshot.forEach(doc => {
             setDarja5Data(pd => [
                 ...pd,
@@ -34,4 +34,4 @@ const Darja5 = () => {
     );
 };
 
-export default Darja5;
+export default DarjaShara5;

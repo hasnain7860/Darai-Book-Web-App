@@ -11,11 +11,11 @@ const BookShowingLayout = ({ImgUrl,ReadingLink,DownloadLink}) => {
     <a href={ReadingLink} >
     <img className="my-1" src={ReadImg} />
     </a>
-        <a href={DownloadLink} >
+        <a href={DownloadLink}  >
     <img  src={DownloadImg} />
     </a>
     </div>
   )
-}
+};
 
 export default BookShowingLayout

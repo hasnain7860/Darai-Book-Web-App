@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 const MainScreen = () => {
   return (
     <>
+    
 <div className="flex justify-center items-center flex-col  ">
   <div className="w-[100vw] " >
     <img className="w-[95%] " src={NetOnImg} />
@@ -17,7 +18,7 @@ const MainScreen = () => {
          <div className="w-[100vw] " >
     <img className="w-[95%] "  src={MainHeadingImg} />
     </div>
-    <Link to="/home" >
+    <Link to="/Darai-Book-Web-App/home" >
          <div className="w-[100vw] " >
     <img className="w-[95%] " src={KotoboBtnImg} />
 </div>

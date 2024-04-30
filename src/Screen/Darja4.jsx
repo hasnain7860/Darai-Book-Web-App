@@ -1,9 +1,37 @@
-import React from 'react'
+import { useState, useEffect } from "react";
+import BookShowingLayout from "../Component/BookShowingLayout.jsx";
+import { database } from "../Firebase/Firebase.jsx";
+import { collection, getDocs } from "firebase/firestore";
 
 const Darja4 = () => {
-  return (
-    <div>d4</div>
-  )
-}
+    const [darja4Data, setDarja4Data] = useState([]);
 
-export default Darja4
+    async function getdata() {
+        const querySnapshot = await getDocs(collection(database, "darja4"));
+        querySnapshot.forEach(doc => {
+            setDarja4Data(pd => [
+                ...pd,
+                { docId: doc.id, docData: JSON.stringify(doc.data()) }
+            ]);
+        });
+    }
+
+    useEffect(() => {
+        getdata();
+    }, []);
+
+    return (
+        <>
+            {darja4Data.map((mapdata, i) => (
+                <BookShowingLayout
+                    key={i}
+                    ImgUrl={JSON.parse(mapdata.docData).image}
+                    ReadingLink={JSON.parse(mapdata.docData).ReadingUrl}
+                    DownloadLink={JSON.parse(mapdata.docData).downloadURL}
+                />
+            ))}
+        </>
+    );
+};
+
+export default Darja4;

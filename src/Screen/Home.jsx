@@ -48,7 +48,7 @@ const Home = () => {
     </div>
 {images.map((pair, i) => (
                 <div key={i} className="w-[100vw] flex justify-center items-center">
-                <Link  to={"darja" + (i+1)} >
+                <Link  to={"darjaShara" + (i+1)} >
                     <div className=" basis-1/2 mx-auto my-2 ">
                         <img className="w-[100%]" src={pair.firstImage} alt={`Image ${i * 2 + 1}`} />
                     </div>
